@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,8 +8,12 @@ public class PlayerHealth : MonoBehaviour
 
     private string playerPrefsKey = "health";
 
+    private PlayerHealthUI healthUI; // new
+
     private void Start()
     {
+        healthUI = GetComponent<PlayerHealthUI>(); // new
+
         if (PlayerPrefs.HasKey(playerPrefsKey))
         {
             health = PlayerPrefs.GetInt(playerPrefsKey);
@@ -20,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
         {
             health = maxHealth;
         }
+
+        healthUI.InitUI(health, maxHealth); // new
     }
 
     public void HealthAdd()
@@ -43,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
             PlayerPrefs.SetInt(playerPrefsKey, maxHealth);
         }
 
-        Debug.Log("Health: " + health);
+        healthUI.UpdateUI(health); // new
 
         if (health <= 0)
         {
