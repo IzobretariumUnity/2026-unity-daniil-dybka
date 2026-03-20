@@ -43,15 +43,6 @@ public class CameraMove : MonoBehaviour
         float y_ = Mathf.Clamp(transform.position.y, distanceBottom, distanceTop);
 
         transform.position = new Vector3(x_, y_, transform.position.z);
-
-        // if (changeDistanceFlip)
-        // {
-        //     if (playerMove.FlipValue() > 0 && distanceX < 0
-        //         || playerMove.FlipValue() == 0 && distanceX > 0)
-        //     {
-        //         distanceX = -distanceX;
-        //     }
-        // }
     }
 
     private void OnDrawGizmos()

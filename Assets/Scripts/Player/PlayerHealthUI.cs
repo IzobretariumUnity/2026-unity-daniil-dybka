@@ -42,7 +42,8 @@ public class PlayerHealthUI : MonoBehaviour
     {
         for (int i = 0; i < objectsHealth.Count; i++)
         {
-            objectsHealth[i].SetActive(i < health);
+            bool active = i >= objectsHealth.Count - health;
+            objectsHealth[i].SetActive(active);
         }
     }
 

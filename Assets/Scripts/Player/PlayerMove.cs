@@ -8,18 +8,21 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce = 15f;
 
     private float moveInput;
+
     private Rigidbody2D rb;
+    private Joystick mobileJoystick;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        GameObject mobileJoystickObject = GameObject.FindGameObjectWithTag("ui_Joystick"); // ui
+        mobileJoystick = mobileJoystickObject ? mobileJoystickObject.GetComponent<Joystick>() : null; // ui
     }
 
     private void Update()
     {
-        moveInput = Input.GetAxis("Horizontal");
-
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        rb.velocity = MoveVelocity(); // new
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -27,8 +30,18 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump() // public
     {
         rb.velocity = Vector2.up * jumpForce;
+    }
+
+    // new
+    private Vector2 MoveVelocity()
+    {
+        bool mobile = Application.isMobilePlatform;
+        moveInput = mobile ? mobileJoystick.Horizontal :
+            Input.GetAxis("Horizontal");
+
+        return new Vector2(moveInput * speed, rb.velocity.y);
     }
 }
