@@ -14,9 +14,16 @@ public class PlayerTouch : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log(other.gameObject.tag);
+
         if (other.gameObject.CompareTag("Flag"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        if (other.gameObject.tag == "EnemyTop")
+        {
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.tag == "Enemy")

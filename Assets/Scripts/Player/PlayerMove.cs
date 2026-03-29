@@ -60,6 +60,6 @@ public class PlayerMove : MonoBehaviour
 
     private Collider2D Ground() // new
     {
-        return Physics2D.OverlapCircle(groundPoint.position, .1f, groundLayer);
+        return Physics2D.OverlapCircle(groundPoint.position, 0.1f, groundLayer);
     }
 }
